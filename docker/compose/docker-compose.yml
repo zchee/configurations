@@ -2,120 +2,130 @@ version: '3.4'
 
 services:
   app:
-    build:
-      context:
-      dockerfile:
-      args:
-      cache_from:
-      labels:
-      shm_size:
-    cap_add:
-    cap_drop:
-    command:
-    configs:
-    cgroup_parent:
-    container_name:
-    credential_spec:
-    deploy:
-      endpoint_mode:
-      labels:
-      mode:
-      placement:
-      replicas:
-      resources:
-      restart_policy:
-      update_config:
-    devices:
-    depends_on:
-    dns:
-    dns_search:
-    tmpfs:
-    entrypoint:
-    env_file:
-    environment:
-    expose:
-    external_links:
-    extra_hosts:
-    healthcheck:
-    image:
-    isolation:
-    labels:
-    links:
-    logging:
-    network_mode:
-    networks:
-      aliases:
-      ipv4_address:
-      ipv6_address:
-    pid:
-    ports:
-    secrets:
-    Short syntax:
-    Long syntax:
-    security_opt:
-    stop_grace_period:
-    stop_signal:
-    sysctls:
-    ulimits:
-    userns_mode:
-    volumes:
-    restart:
-    domainname:
-    hostname:
-    ipc:
-    mac_address:
-    privileged:
-    read_only:
-    shm_size:
-    stdin_open:
-    tty:
-    user:
-    working_dir:
+    build:  # Configuration options that are applied at build time.
+      context:  # Either a path to a directory containing a Dockerfile, or a url to a git repository.
+      dockerfile:  # Alternate Dockerfile.
+      args:  # Add build arguments, which are environment variables accessible only during the build process.
+      cache_from:  # A list of images that the engine will use for cache resolution.
+      labels:  # Add metadata to the resulting image using Docker labels. You can use either an array or a dictionary.
+      shm_size:  # Set the size of the /dev/shm partition for this build’s containers.
+    cap_add:  # Add container capabilities. See man 7 capabilities for a full list.
+    cap_drop:  # Drop container capabilities. See man 7 capabilities for a full list.
+    command:  # Override the default command.
+    configs:  # Grant access to configs on a per-service basis using the per-service configs configuration.
+    cgroup_parent:  # Specify an optional parent cgroup for the container.
+    container_name:  # Specify a custom container name, rather than a generated default name.
+    credential_spec:  # Configure the credential spec for managed service account. 
+    deploy:  # Specify configuration related to the deployment and running of services.
+      endpoint_mode:  # Specify a service discovery method for external clients connecting to a swarm.
+      labels:  # Specify labels for the service. These labels will only be set on the service, and not on any containers for the service.
+      mode:  # Either global (exactly one container per swarm node) or replicated (a specified number of containers).
+      placement:  # Specify placement of constraints and preferences.
+      replicas:  # If the service is replicated (which is the default), specify the number of containers that should be running at any given time.
+      resources:  # Configures resource constraints.
+      restart_policy:  # Configures if and how to restart containers when they exit. Replaces restart.
+      update_config:  # Configures how the service should be updated. Useful for configuring rolling updates.
+    devices:  # List of device mappings. Uses the same format as the --device docker client create option.
+    depends_on:  # Express dependency between services
+    dns:  # Custom DNS servers. Can be a single value or a list.
+    dns_search:  # Custom DNS search domains. Can be a single value or a list.
+    tmpfs:  # Mount a temporary file system inside the container. Can be a single value or a list.
+    entrypoint:  # Override the default entrypoint.
+    env_file:  # Add environment variables from a file. Can be a single value or a list.
+    environment:  # Add environment variables.
+    expose:  # Expose ports without publishing them to the host machine - they’ll only be accessible to linked services.
+    external_links:  # Link to containers started outside this docker-compose.yml or even outside of Compose, especially for containers that provide shared or common services.
+    extra_hosts:  # Add hostname mappings. Use the same values as the docker client --add-host parameter.
+    healthcheck:  # Configure a check that’s run to determine whether or not containers for this service are “healthy”.
+    image:  # Specify the image to start the container from.
+    isolation:  # Specify a container’s isolation technology.
+    labels:  # Add metadata to containers using Docker labels.
+    links:  # [Warning] The --link flag is a legacy feature of Docker. Link to containers in another service.
+    logging:  # Logging configuration for the service.
+    network_mode:  # Network mode. Use the same values as the docker client --net parameter, plus the special form service:[service name].
+    networks:  # Network mode. Use the same values as the docker client --net parameter, plus the special form service:[service name].
+      aliases:  # Aliases (alternative hostnames) for this service on the network.
+      ipv4_address:  # Specify a static IP4 address for containers for this service when joining the network.
+      ipv6_address:  # Specify a static IP6 address for containers for this service when joining the network.
+    pid:  # Sets the PID mode to the host PID mode.
+    ports:  # Expose ports.
+    secrets:  # Grant access to secrets on a per-service basis using the per-service secrets configuration.
+    security_opt:  # Override the default labeling scheme for each container.
+    stop_grace_period:  # Specify how long to wait when attempting to stop a container if it doesn’t handle SIGTERM (or whatever stop signal has been specified with stop_signal), before sending SIGKILL.
+    stop_signal:  # Sets an alternative signal to stop the container.
+    sysctls:  # Kernel parameters to set in the container.
+    ulimits:  # Override the default ulimits for a container.
+      nproc:
+      nofile:
+        soft:
+        hard:
+    userns_mode:  # Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
+    volumes:  # Mount host paths or named volumes, specified as sub-options to a service.
+      # Caching Options For Volume Mounts (Docker for Mac)
+      .:/var/www/project:consistent:  # Full consistency. The container runtime and the host maintain an identical view of the mount at all times. This is the default.
+      .:/var/www/project:cached:      # The host’s view of the mount is authoritative. There may be delays before updates made on the host are visible within a container.
+      .:/var/www/project:delegated:   # The container runtime’s view of the mount is authoritative. There may be delays before updates made in a container are visible on the host.
+    restart:  # no is the default restart policy, and it will not restart a container under any circumstance. ("no", always, on-failure, unless-stopped)
+    domainname:  # Each of these is a single value, analogous to its docker run counterpart.
+    hostname:  # Each of these is a single value, analogous to its docker run counterpart.
+    ipc:  # Each of these is a single value, analogous to its docker run counterpart.
+    mac_address:  # Each of these is a single value, analogous to its docker run counterpart.
+    privileged:  # Each of these is a single value, analogous to its docker run counterpart.
+    read_only:  # Each of these is a single value, analogous to its docker run counterpart.
+    shm_size:  # Each of these is a single value, analogous to its docker run counterpart.
+    stdin_open:  # Each of these is a single value, analogous to its docker run counterpart.
+    tty:  # Each of these is a single value, analogous to its docker run counterpart.
+    user:  # Each of these is a single value, analogous to its docker run counterpart.
+    working_dir:  # Each of these is a single value, analogous to its docker run counterpart.
 
 volumes:
   data:
-    driver:
-    driver_opts:
-    external:
-    labels:
-    name:
+    driver:  # Specify which volume driver should be used for this volume.
+    driver_opts:  # Specify a list of options as key-value pairs to pass to the driver for this volume.
+    external:  # If set to true, specifies that this volume has been created outside of Compose.
+    labels:  # Add metadata to containers using Docker labels.
+    name:  # Set a custom name for this volume.
 
 networks:
   backend:
-    driver:
-    bridge:
-    overlay:
-    host or none:
-    driver_opts:
-    attachable:
-    enable_ipv6:
-    ipam:
-    internal:
-    labels:
-    external:
-    name:
+    driver:  # Specify which driver should be used for this network. The default driver depends on how the Docker Engine you’re using is configured, but in most instances it will be bridge on a single host and overlay on a Swarm.
+      bridge:  # Docker defaults to using a bridge network on a single host.
+      overlay:  # The overlay driver creates a named network across multiple nodes in a swarm.
+      host or none:  # Use the host’s networking stack. 
+      none:  # No networking. 
+    driver_opts:  # Specify a list of options as key-value pairs to pass to the driver for this network.
+    attachable:  # Only used when the driver is set to overlay. If set to true, then standalone containers can attach to this network, in addition to services.
+    enable_ipv6:  # Enable IPv6 networking on this network. Not supported in Compose File version 3 enable_ipv6 requires you to use a version 2 Compose file, as this directive is not yet supported in Swarm mode.
+    ipam:  # Specify custom IPAM config.
+      driver:  # Custom IPAM driver, instead of the default.
+      config:  # A list with zero or more config blocks, each containing any of the following keys:
+        subnet:  # Subnet in CIDR format that represents a network segment
+    internal:  # By default, Docker also connects a bridge network to it to provide external connectivity. If you want to create an externally isolated overlay network, you can set this option to true.
+    labels:  # Add metadata to containers using Docker labels.
+    external:  # If set to true, specifies that this network has been created outside of Compose.
+    name:  # Set a custom name for this network.
 
 configs:
   my_first_config:
-    file: ./config_data
+    file: ./config_data  # The config is created with the contents of the file at the specified path.
   my_second_config:
-    external: true
+    external: true  # If set to true, specifies that this config has already been created. Docker will not attempt to create it, and if it does not exist, a config not found error occurs.
   my_third_config:
     file: ./config_data
   my_fourth_config:
     external:
-      name: redis_config
+      name: redis_config  # The actual name of the config object in Docker. Introduced with the 3.5 file format.
 
 secrets:
   my_first_secret:
-    file: ./secret_data
+    file: ./secret_data  # The secret is created with the contents of the file at the specified path.
   my_second_secret:
-    external: true
+    external: true  # If set to true, specifies that this secret has already been created. Docker will not attempt to create it, and if it does not exist, a secret not found error occurs.
   my_third_secret:
     file: ./secret_data
   my_fourth_secret:
     external:
-      name: redis_secret
+      name: redis_secret  # The actual name of the config object in Docker. Introduced with the 3.5 file format.
 
 # Extension fields
 x-volumes:
