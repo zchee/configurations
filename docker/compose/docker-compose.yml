@@ -1,0 +1,137 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context:
+      dockerfile:
+      args:
+      cache_from:
+      labels:
+      shm_size:
+    cap_add:
+    cap_drop:
+    command:
+    configs:
+    cgroup_parent:
+    container_name:
+    credential_spec:
+    deploy:
+      endpoint_mode:
+      labels:
+      mode:
+      placement:
+      replicas:
+      resources:
+      restart_policy:
+      update_config:
+    devices:
+    depends_on:
+    dns:
+    dns_search:
+    tmpfs:
+    entrypoint:
+    env_file:
+    environment:
+    expose:
+    external_links:
+    extra_hosts:
+    healthcheck:
+    image:
+    isolation:
+    labels:
+    links:
+    logging:
+    network_mode:
+    networks:
+      aliases:
+      ipv4_address:
+      ipv6_address:
+    pid:
+    ports:
+    secrets:
+    Short syntax:
+    Long syntax:
+    security_opt:
+    stop_grace_period:
+    stop_signal:
+    sysctls:
+    ulimits:
+    userns_mode:
+    volumes:
+    restart:
+    domainname:
+    hostname:
+    ipc:
+    mac_address:
+    privileged:
+    read_only:
+    shm_size:
+    stdin_open:
+    tty:
+    user:
+    working_dir:
+
+volumes:
+  data:
+    driver:
+    driver_opts:
+    external:
+    labels:
+    name:
+
+networks:
+  backend:
+    driver:
+    bridge:
+    overlay:
+    host or none:
+    driver_opts:
+    attachable:
+    enable_ipv6:
+    ipam:
+    internal:
+    labels:
+    external:
+    name:
+
+configs:
+  my_first_config:
+    file: ./config_data
+  my_second_config:
+    external: true
+  my_third_config:
+    file: ./config_data
+  my_fourth_config:
+    external:
+      name: redis_config
+
+secrets:
+  my_first_secret:
+    file: ./secret_data
+  my_second_secret:
+    external: true
+  my_third_secret:
+    file: ./secret_data
+  my_fourth_secret:
+    external:
+      name: redis_secret
+
+# Extension fields
+x-volumes:
+  &default-volume
+  driver: foobar-storage
+
+services:
+  web:
+    image: myapp/web:latest
+    volumes: ["vol1", "vol2", "vol3"]
+volumes:
+  vol1: *default-volume
+  vol2:
+    << : *default-volume
+    name: volume02
+  vol3:
+    << : *default-volume
+    driver: default
+    name: volume-local
